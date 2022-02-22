@@ -1,0 +1,29 @@
+{
+  "name": "clip2gif",
+  "version": "1.2.6",
+  "description": "Clip to GIF creates a reduced file size MP4 and an animated GIF.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "clip2gif": "./index.js"
+  },
+  "keywords": [
+    "ffmpeg",
+    "reduce file size",
+    "GIF creator",
+    "mp4"
+  ],
+  "author": "Paul Dickerson",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ticklemycode/clip2gif"
+  },
+  "dependencies": {
+    "command-exists": "^1.2.9",
+    "command-line-args": "^5.2.1",
+    "command-line-usage": "^6.1.1"
+  }
+}
