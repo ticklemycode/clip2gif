@@ -21,7 +21,7 @@ The GIF below was created with `clip2gif` from a Camtasia (MP4) screen recording
 The following will create a smaller file size version of the original file and create a 30s animated GIF.
 
 ```bash
-  clip2gif -f /folder/sample.mp4 -t 30
+  clip2gif -f /folder/sample.mp4 -s 2.5
 ```
 
 ## Options
