@@ -3,8 +3,9 @@ const commandLineUsage = require('command-line-usage');
 
 const optionDefinitions = [
   { name: 'help', alias: 'h', type: Boolean, description: 'Display this usage guide.'},
-  { name: 'file', alias: 'f', type: String, description: 'Path to file you want to convert to GIF'},
-	{ name: 'speed', alias: 's', type: String, description: 'Used to speed up video, default is 1x. Ex: for 2.5x playback use 2.5', defaultValue: '1'},
+  { name: 'src', type: String, description: 'Path to srouce file you want to convert to GIF', defaultOption: true},
+  { name: 'speed', alias: 's', type: String, description: 'Used to speed up video, default is 1x. Ex: for 2.5x playback use 2.5', defaultValue: '1'},
+  { name: 'outputDir', alias: 'o', type: String, description: 'Output directory. Default will be the same directory as source file.'},
 	{ name: 'protect', alias: 'p', type: Boolean, description: 'Protect will prevent existing files from being overwritten. Default is files ARE overwritten.'}
 ];
 
@@ -18,10 +19,11 @@ const sections = [
   {
     header: 'Synopsis',
     content: [
-      '$ c2gif {bold --file} foo.mp4 {bold --speed} 2',
-			'$ c2gif {bold --file} foo.mp4',
-			'$ c2gif {bold --file} foo.mp4 {bold --protect} -p',,
-      '$ c2gif {bold --help}'
+			'$ c2gif clip.mp4',
+      '$ c2gif clip.mp4 {bold -s} 2',
+      '$ c2gif clip.mp4 {bold -p}',
+      '$ c2gif clip.mov {bold -o} ./other-dir/"',
+      '$ c2gif {bold -h}'
     ]
   },
   {
