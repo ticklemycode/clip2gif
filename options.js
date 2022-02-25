@@ -19,11 +19,11 @@ const sections = [
   {
     header: 'Synopsis',
     content: [
-			'$ c2gif clip.mp4',
-      '$ c2gif clip.mp4 {bold -s} 2',
-      '$ c2gif clip.mp4 {bold -p}',
-      '$ c2gif clip.mov {bold -o} ./other-dir/"',
-      '$ c2gif {bold -h}'
+			'$ clip2gif clip.mp4',
+      '$ clip2gif clip.mp4 {bold -s} 2',
+      '$ clip2gif clip.mp4 {bold -p}',
+      '$ clip2gif clip.mov {bold -o} ./other-dir/"',
+      '$ clip2gif {bold -h}'
     ]
   },
   {

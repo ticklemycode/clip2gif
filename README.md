@@ -21,14 +21,15 @@ The GIF below was created with `clip2gif` from a Camtasia (MP4) screen recording
 The following will create a smaller file size version of the original file and create a 30s animated GIF.
 
 ```bash
-  clip2gif -f /folder/sample.mp4 -s 2.5
+  clip2gif /folder/sample.mp4 -s 2.5
 ```
 
 ## Options
 
-| option                | description                                                                                                   |
-|-----------------------|---------------------------------------------------------------------------------------------------------------|
-| -h, --help            | Display this usage guide.                                                                                     |
-| f, --file string      | Path to file you want to convert to GIF                                                                       |
-| -s, --speed string    | Used to speed up video, default is 1x. Ex: for 2.5x playback use `2.5`                                                                             |
-| -p, --protect         | Protect will prevent existing files from being overwritten. By default files ARE overwritten.                 |
+| option                  | description                                                                                                   |
+|-------------------------|---------------------------------------------------------------------------------------------------------------|
+| -h, --help              | Display this usage guide.                                                                                     |
+| --src, --file string    | Path to srouce file you want to convert to GIF                                                                |
+| -o, --outputDir string  | Output directory. Default will be the same directory as source file.                                         |
+| -s, --speed string      | Used to speed up video, default is 1x. Ex: for 2.5x playback use `2.5`                                        |
+| -p, --protect           | Protect will prevent existing files from being overwritten. By default files ARE overwritten.                 |
