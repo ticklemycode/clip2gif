@@ -3,7 +3,7 @@
 > Note: `ffmpeg` (v4.4.1 or greater) is required in order to use this package. You can download `ffmpeg` from https://ffmpeg.org/download.html or install with Homebrew `brew install ffmpeg`
 
 ## Why?
-This tool was created to quickly share screen recording from Camtasia or Quicktime which in some cases would normally be too large to send over email. It also creates a handy animated GIF which can be shared within team collaboration software like Slack and WebEx which usually play animated GIF files automatically in the chat window which is pretty kewl! 
+This tool was created to quickly share screen recordings from Camtasia or Quicktime which in some cases would normally be too large to send over email. It also creates a handy animated GIF which can be shared within team collaboration software like Slack and WebEx which usually play animated GIF files automatically in the chat window which is pretty kewl! 
 
 > Tested with `.mov` and `.mp4` files. This tool can reduce an MP4 file size down **90%** from its original file size and MOV files down **80%** and still **maintain excellent quality**.
 
