@@ -3,12 +3,15 @@
 > Note: `ffmpeg` (v4.4.1 or greater) is required in order to use this package. You can download `ffmpeg` from https://ffmpeg.org/download.html or install with Homebrew `brew install ffmpeg`
 
 ## Why?
-This tool was created to quickly share screen recordings from Camtasia or Quicktime which in some cases would normally be too large to send over email. It also creates a handy animated GIF which can be shared within team collaboration software like Slack and WebEx which usually play animated GIF files automatically in the chat window which is pretty kewl! 
+This tool was created to quickly share screen recordings as an animated GIFs within team collaboration tools like Slack and WebEx. Animated GIFs can also compliment changes within a Github or Bitbucket pull request. 
 
-> Tested with `.mov` and `.mp4` files. This tool can reduce an MP4 file size down **90%** from its original file size and MOV files down **80%** and still **maintain excellent quality**.
+## How?
+Under the hood this tool will execute `ffmpeg` commands to first create a compressed version of the original clip which is used to then produce the most optimized animated GIF possible. (The compressed version of the original clip can be also be saved with the `--saveClip` flag, otherwise only the GIF will be created).
+
+> Tested with `.mov` and `.mp4` files. `clip2gif` can reduce an MP4 to **90%** from its original file size and MOV files down **80%** and still **maintain excellent quality**.
 
 ## Sample
-The GIF below was created with `clip2gif` from a Camtasia (MP4) screen recording. It's a 40 second GIF!
+The GIF below was created with `clip2gif` from a Camtasia screen recording. It's a 40 second GIF!
 
 ![Sample GIF](./samples/sample.gif)
 
@@ -29,7 +32,12 @@ The following will create a smaller file size version of the original file and c
 | option                  | description                                                                                                   |
 |-------------------------|---------------------------------------------------------------------------------------------------------------|
 | -h, --help              | Display this usage guide.                                                                                     |
-| --src, --file string    | Path to srouce file you want to convert to GIF                                                                |
-| -o, --outputDir string  | Output directory. Default will be the same directory as source file.                                         |
+| --src, --file string    | Path to source file you want to convert to GIF                                                                |
 | -s, --speed string      | Used to speed up video, default is 1x. Ex: for 2.5x playback use `2.5`                                        |
+| -o, --outputDir string  | Output directory. Default will be the same directory as source file.                                          |
+| -e, --saveClip          | Save compressed version of the orginal source.                                                                |
+| -y, --clipOnly          | Create the compressed clip only, GIF will NOT be created.                                                     |
 | -p, --protect           | Protect will prevent existing files from being overwritten. By default files ARE overwritten.                 |
+
+## Notes
+Keep your clips as sort as possible, animated GIF aren't suppose to be long.

@@ -13,7 +13,7 @@ if (options.help) {
 }
 
 if (!options.src) {
-	console.log(`${colors.FgYellow}Path to clip is required. EX: ${colors.FgGreen} c2gif -f myfile.mp4`);
+	console.log(`${colors.FgYellow}Path to clip is required. EX: ${colors.FgGreen} clip2gif myfile.mp4`);
 	return false;
 }
 
@@ -32,9 +32,10 @@ const size = {
 	end: 0
 };
 const filename = options.src.split("/").pop().replace(/\.(.*)/, '');
-const smFilename = `${filename}-SM.mp4`;
+const smFilename = `${filename}_COMPRESSED.mp4`;
 const hasPath = options.src.match(/.*\//);
 let output = hasPath ? hasPath[0] : '';
+const outputClipFilename = `${output}${smFilename}`;
 
 if(options.outputDir) {
 	output = options.outputDir.replace(/\/?$/, '/');
@@ -67,20 +68,20 @@ async function reduceFileSizeAndCreateGIF() {
 		size.start = fileSize;
 
 		log([
-			`${colors.FgCyan}Reducing file size started...`,
-			`👉 Current file size: ${fileSize}MB`
+			`${colors.FgCyan}Creating compressed clip started...`,
+			`👉 Current file size: ${colors.FgYellow}${fileSize}MB`
 			]
 		);
 		
-		await exec(`ffmpeg -y -i ${options.src} -vcodec h264 -an -filter:v "setpts=PTS/${options.speed}" -acodec aac ${output}${smFilename}`);
+		await exec(`ffmpeg -y -i ${options.src} -vcodec h264 -an -filter:v "setpts=PTS/${options.speed}" -acodec aac ${outputClipFilename}`);
 
-		const outputFileSize = getFileSize(`${output}${smFilename}`);
+		const outputFileSize = getFileSize(`${outputClipFilename}`);
 		size.end = outputFileSize;
 
 		log([
-			`${colors.FgCyan}Reducing file size complete. ✅`,
-			`${colors.FgCyan}👉 Reduced file size: ${outputFileSize}MB`,
-			`${colors.FgYellow}🎬 ${output}${smFilename}`
+			`${colors.FgCyan}Creating compressed clip complete. ✅`,
+			`${colors.FgCyan}👉 Reduced file size: ${colors.FgGreen}${outputFileSize}MB`,
+			`${colors.FgYellow}🎬 ${outputClipFilename}`
 			]
 		);
 		
@@ -91,8 +92,10 @@ async function reduceFileSizeAndCreateGIF() {
 			`└──────────────────────────────────┘`,
 			``
 		]);
-
-		createGIF();
+		
+		if(!options.clipOnly) {
+			createGIF();
+		}
 	} catch (e) {
 		console.error(`${colors.FgYellow}${e}`);
 	}
@@ -104,6 +107,7 @@ async function createGIF() {
 		const fileDuration = ++stdout;
 		const reduceDuration = fileDuration > MAX_DURATION;
 		const duration = reduceDuration ? MAX_DURATION : fileDuration.toFixed(0);
+		const outputGifFilename = `${output}${filename}.gif`;
 		
 		if(reduceDuration) {
 			console.log(`${colors.FgYellow}⚠️  GIF duration is limited to ${MAX_DURATION} seconds! Keep it short!\n`)
@@ -111,13 +115,23 @@ async function createGIF() {
 		
 		console.log(`${colors.FgMagenta}Creating GIF started...`);
 		
-		exec(`ffmpeg -y -ss 0 -t ${duration} -i ${output}${smFilename} -vf "fps=20,scale=800:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 ${output}${filename}.gif`)
+		exec(`ffmpeg -y -ss 0 -t ${duration} -i ${outputClipFilename} -vf "fps=20,scale=800:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 ${outputGifFilename}`)
 		.then(() => {
 			log([
 				`${colors.FgMagenta}Creating GIF complete. ✅`,
-				`${colors.FgYellow}🖼  ${output}${filename}.gif \n`,
+				`${colors.FgYellow}🖼  ${outputGifFilename} \n`,
 				`${colors.FgCyan}Enjoy! 🍔`
 			]);
+
+			if(!options.saveClip) {
+				console.log(`${colors.FgCyan}Cleaning up...`);
+				exec(`rm -rf ${outputClipFilename}`).then(() => {
+					log([
+						'Compressed clip deleted.',
+						'Clean up complete.'
+					]);
+				});
+			}
 		});
 	})
 }
