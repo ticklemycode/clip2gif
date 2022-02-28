@@ -11,7 +11,7 @@ Under the hood this tool will execute `ffmpeg` commands to first create a compre
 > Tested with `.mov` and `.mp4` files. `clip2gif` can reduce an MP4 to **90%** from its original file size and MOV files down **80%** and still **maintain excellent quality**.
 
 ## Sample
-The GIF below was created with `clip2gif` from a Camtasia screen recording. It's a 40 second GIF!
+The GIF below was created with `clip2gif` from a Camtasia screen recording. It was 40 second clip sped up 2x to create a 20 second clip.
 
 ![Sample GIF](./samples/sample.gif)
 
